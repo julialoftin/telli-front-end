@@ -20,6 +20,7 @@ export default function DisplayAllWatchLists() {
     }
 
     useEffect(() => {
+        if (watchLists.length === 0)
         fetchGetWatchLists();
     }, [watchLists]);
 
