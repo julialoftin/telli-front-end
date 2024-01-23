@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { WatchList } from "./ViewWatchLists"
 
 interface EditWatchListDTO {
   newName: string;
   newDescription: string;
+}
+
+interface EditWatchListFormProps {
+    watchList: WatchList;
+    onUpdate: (updatedWatchList: WatchList) => void;
 }
 
 async function fetchEditWatchList(
@@ -26,7 +32,7 @@ async function fetchEditWatchList(
   }
 }
 
-export default function EditWatchListForm({ watchList, onUpdate }) {
+export default function EditWatchListForm({ watchList, onUpdate }: EditWatchListFormProps) {
   async function handleEditWatchList(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import EditWatchListForm from "./EditWatchListForm";
 
-interface WatchList {
+export interface WatchList {
   id: number;
   name: string;
   description: string;
