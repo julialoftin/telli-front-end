@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import EditWatchListForm from "./EditWatchListForm";
 import DeleteWatchListButton from "./DeleteWatchListButton";
+import EditWatchListButton from "./EditWatchListButton";
 
 export interface WatchList {
   id: number;
@@ -56,9 +57,7 @@ export default function DisplayAllWatchLists() {
                 <>
                   <h3>{watchList.name}</h3>
                   <p>{watchList.description}</p>
-                  <button onClick={() => handleEditClick(watchList)}>
-                    Edit
-                  </button>
+                  <EditWatchListButton onClick={() => handleEditClick(watchList)} />
                   <DeleteWatchListButton onDelete={fetchGetWatchLists} watchListId={watchList.id} />
                 </>
               )}
