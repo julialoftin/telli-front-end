@@ -2,6 +2,8 @@
 
 Project for LaunchCode's LiftOff Program
 
+Back end repo link: https://github.com/julialoftin/CapStoneBackEnd
+
 Julia Loftin
 
 Angela Engle
