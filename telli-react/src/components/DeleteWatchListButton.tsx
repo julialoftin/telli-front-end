@@ -14,6 +14,7 @@ export default function DeleteWatchListButton({ watchListId, onDelete }: DeleteW
                 },
             });
             if (response.ok) {
+                // POssibly add alert box here before proceeding with deletion?
                 onDelete();
             } else {
                 console.error("Error deleting existing WatchList.")
