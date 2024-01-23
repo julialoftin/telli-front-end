@@ -50,22 +50,24 @@ export default function DisplayAllWatchLists() {
         <ul>
           {watchLists.map((watchList) => (
             <li key={watchList.id}>
-              <h3>{watchList.name}</h3>
-              <p>{watchList.description}</p>
-              <button onClick={() => handleEditClick(watchList)}>Edit</button>
-              
-              
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {editingWatchList && (
+              {editingWatchList && editingWatchList.id === watchList.id ? (
                 <EditWatchListForm
                   watchList={editingWatchList}
                   onUpdate={handleUpdatedWatchList}
                 />
-      )}
+              ) : (
+                <>
+                  <h3>{watchList.name}</h3>
+                  <p>{watchList.description}</p>
+                  <button onClick={() => handleEditClick(watchList)}>
+                    Edit
+                  </button>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
