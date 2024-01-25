@@ -41,6 +41,10 @@ export default function DisplayAllWatchLists() {
     setEditingWatchList(null);
   };
 
+  const handleCancelEdit = () => {
+    setEditingWatchList(null);
+  }
+
   return (
     <>
       <div>
@@ -52,6 +56,7 @@ export default function DisplayAllWatchLists() {
                 <EditWatchListForm
                   watchList={editingWatchList}
                   onUpdate={handleUpdatedWatchList}
+                  onCancel={handleCancelEdit}
                 />
               ) : (
                 <>

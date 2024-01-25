@@ -9,6 +9,7 @@ interface EditWatchListDTO {
 interface EditWatchListFormProps {
     watchList: WatchList;
     onUpdate: (updatedWatchList: WatchList) => void;
+    onCancel: () => void;
 }
 
 async function fetchEditWatchList(
@@ -32,7 +33,7 @@ async function fetchEditWatchList(
   }
 }
 
-export default function EditWatchListForm({ watchList, onUpdate }: EditWatchListFormProps) {
+export default function EditWatchListForm({ watchList, onUpdate, onCancel }: EditWatchListFormProps) {
   async function handleEditWatchList(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -73,6 +74,7 @@ export default function EditWatchListForm({ watchList, onUpdate }: EditWatchList
           defaultValue={watchList.description}
         ></input>
         <button type="submit">Update</button>
+        <button type="button" onClick={onCancel}>Cancel</button>
       </form>
     </>
   );
