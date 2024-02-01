@@ -14,10 +14,11 @@ interface WatchList {
 
 interface AddMediaToWatchListProps {
   mediaItemDTO: MediaItemDTO;
+  mediaTitle: string;
 }
 
 export default function AddMediaToWatchListSelect({
-  mediaItemDTO,
+  mediaItemDTO, mediaTitle
 }: AddMediaToWatchListProps) {
   const [watchLists, setWatchLists] = useState<WatchList[]>([]);
   const [selectedWatchList, setSelectedWatchList] = useState<number | null>(
@@ -37,23 +38,42 @@ export default function AddMediaToWatchListSelect({
   }, []);
 
   const handleAddToWatchList = async () => {
-    if (!selectedWatchList || !mediaItemDTO) {
-      return console.error("Watch List or Media Item details missing.");
-    }
+    if (!selectedWatchList || !mediaItemDTO.mediaType) {
+      try {
+        [movieResult, tvResult] = await Promise.all([
+          fetch(`https://api.themoviedb.org/3/movie/${mediaItemDTO.tmdbId}?api_key=${}`),
+          fetch(`https://api.themoviedb.org/3/tv/${mediaItemDTO.tmdbId}?api_key=${}`),
+        ])
+        const [movieData, tvData] = await Promise.all([movieResult.json(), tvResult.json()])
 
-    try {
-      const response = await fetch(
-        `http://localhost:8080/api/add-to-watchlist/${selectedWatchList}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(mediaItemDTO),
-        }
-      );
-      const result = await response.json();
-      return result;
+        if (movieData.name === mediaTitle) {
+          mediaItemDTO.mediaType = 'movie'
+        } else if (tvData.name === mediaTitle) {
+          mediaItemDTO.mediaType = 'tv'
+         } else {
+          console.error("Media type could not be determined");
+          return;
+         }
+      } catch (error) {
+        console.error("Error fetching media details: ", error);
+        return;
+      }
+    }
+    
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/add-to-watchlist/${selectedWatchList}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(mediaItemDTO),
+          }
+        );
+        const result = await response.json();
+        return result;
+      
     } catch (error) {
       console.error("Error adding media item to watchlist: ", error);
     }
