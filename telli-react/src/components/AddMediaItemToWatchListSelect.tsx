@@ -40,11 +40,11 @@ export default function AddMediaToWatchListSelect({
   const handleAddToWatchList = async () => {
     if (!selectedWatchList || !mediaItemDTO.mediaType) {
       try {
-        [movieResult, tvResult] = await Promise.all([
+        const [movieResult, tvResult]: [Response, Response] = await Promise.all([
           fetch(`https://api.themoviedb.org/3/movie/${mediaItemDTO.tmdbId}?api_key=${}`),
           fetch(`https://api.themoviedb.org/3/tv/${mediaItemDTO.tmdbId}?api_key=${}`),
         ])
-        const [movieData, tvData] = await Promise.all([movieResult.json(), tvResult.json()])
+        const [movieData, tvData]: [any, any] = await Promise.all([movieResult.json(), tvResult.json()])
 
         if (movieData.name === mediaTitle) {
           mediaItemDTO.mediaType = 'movie'
@@ -59,7 +59,7 @@ export default function AddMediaToWatchListSelect({
         return;
       }
     }
-    
+
       try {
         const response = await fetch(
           `http://localhost:8080/api/add-to-watchlist/${selectedWatchList}`,
