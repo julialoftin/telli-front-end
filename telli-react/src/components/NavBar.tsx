@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import LogoutButton from "./LogoutButton";
 
 interface NavBarProps {
   isLoggedIn: boolean;
@@ -44,7 +45,8 @@ const NavBar: React.FC<NavBarProps> = ({ isLoggedIn, setIsLoggedIn }) => {
                 </Link>
               </li>
               <li>
-                <button>Logout</button>
+                {/* <button>Logout</button> */}
+                <LogoutButton  setIsLoggedIn={setIsLoggedIn} />
               </li>
             </>
           ) : (
