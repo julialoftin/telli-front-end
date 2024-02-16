@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function NavBar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+interface NavBarProps {
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const NavBar: React.FC<NavBarProps> = ({ isLoggedIn, setIsLoggedIn }) => {
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     const checkLoggedInStatus = async () => {
       try {
@@ -28,27 +33,42 @@ export default function NavBar() {
 
   return (
     <>
-        <nav>
-            <ul>
-                {isLoggedIn ? (
-                    <li>
-                        <button>Logout</button>
-                    </li>
-                ) : (
-                    <>
-                        <li>
-                            <Link to="/"><button>Home</button></Link>
-                        </li>
-                        <li>
-                            <Link to="/register"><button>Register</button></Link>
-                        </li>
-                        <li>
-                            <Link to="/login"><button>Log In</button></Link>
-                        </li>
-                    </>
-                )}
-            </ul>
-        </nav>
+      <nav>
+        <ul>
+          {isLoggedIn ? (
+            <>
+              <li>
+                <Link to="/">
+                  <button>Home</button>
+                </Link>
+              </li>
+              <li>
+                <button>Logout</button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link to="/">
+                  <button>Home</button>
+                </Link>
+              </li>
+              <li>
+                <Link to="/register">
+                  <button>Register</button>
+                </Link>
+              </li>
+              <li>
+                <Link to="/login">
+                  <button>Log In</button>
+                </Link>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
     </>
   );
-}
+};
+
+export default NavBar;

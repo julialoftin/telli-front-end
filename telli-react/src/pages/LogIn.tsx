@@ -1,10 +1,8 @@
 import LogInForm from "../components/LogInForm";
-import NavBar from "../components/NavBar";
 
-export default function LogIn() {
+export default function LogIn({ setIsLoggedIn }: { setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }) {
   return (
     <>
-      <NavBar />
       <LogInForm setIsLoggedIn={setIsLoggedIn} />
     </>
   );
