@@ -9,29 +9,56 @@ export interface WatchList {
   description: string;
 }
 
+export async function fetchGetWatchLists(): Promise<WatchList[]> {
+  try {
+    const response = await fetch("http://localhost:8080/api/watchlist/get-all", {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    });
+    const result = await response.json();
+    // setWatchLists(result);
+    return result;
+  } catch (error) {
+    console.error("Error retrieving Watch Lists: ", error);
+    return [];
+  }
+}
+
 export default function DisplayAllWatchLists() {
   const [watchLists, setWatchLists] = useState<WatchList[]>([]);
   const [editingWatchList, setEditingWatchList] = useState<WatchList | null>(
     null
   );
 
-  async function fetchGetWatchLists() {
-    try {
-      const response = await fetch("http://localhost:8080/api/watchlist/get-all", {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include'
-      });
-      const result = await response.json();
-      setWatchLists(result);
-    } catch (error) {
-      console.error("Error retrieving Watch Lists: ", error);
-    }
-  }
+  // async function fetchGetWatchLists(): Promise<WatchList[]> {
+  //   try {
+  //     const response = await fetch("http://localhost:8080/api/watchlist/get-all", {
+  //       method: "GET",
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       credentials: 'include'
+  //     });
+  //     const result = await response.json();
+  //     setWatchLists(result);
+  //     return result;
+  //   } catch (error) {
+  //     console.error("Error retrieving Watch Lists: ", error);
+  //     return [];
+  //   }
+  // }
   useEffect(() => {
-    if (watchLists.length === 0) fetchGetWatchLists();
+    async function fetchData() {
+      const data = await fetchGetWatchLists();
+      setWatchLists(data);
+    }
+
+    if (watchLists.length === 0) {
+      fetchData();
+    }
   }, [watchLists]);
 
   const handleEditClick = (watchList: WatchList) => {
