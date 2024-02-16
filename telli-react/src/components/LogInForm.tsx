@@ -24,9 +24,9 @@ async function fetchLoginAPI(logInFormInfo: LogInFormInfo) {
   }
 }
 
-export default function LogInForm() {
+export default function LogInForm({ setIsLoggedIn }: { setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [logInMessage, setLogInMessage] = useState<string | null>(null);
-  const [logInSuccess, setLogInSuccess] = useState<boolean>(false);
+  const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
   async function logInUser(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -46,24 +46,28 @@ export default function LogInForm() {
       const response = await fetchLoginAPI(logInFormInfo);
       if (response && response.message) {
         setLogInMessage(response.message);
-        setLogInSuccess(true);
+        setIsLoggedIn(true);
+        setLoginSuccess(true);
       } else if (response && response.error) {
         setLogInMessage(response.error);
-        setLogInSuccess(false);
+        setIsLoggedIn(false);
+        setLoginSuccess(false);
       } else {
         setLogInMessage("An unexpected error occurred during registration.");
-        setLogInSuccess(false);
+        setIsLoggedIn(false);
+        setLoginSuccess(false);
       }
     } catch (error) {
       console.error(error);
-      setLogInSuccess(false);
+      setIsLoggedIn(false);
+      setLoginSuccess(false);
     }
   }
 
   return (
     <>
       <div>
-        {logInSuccess ? (
+        {loginSuccess ? (
           <div className="message">{logInMessage}</div>
         ) : (
           <div>

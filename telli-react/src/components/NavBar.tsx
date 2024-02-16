@@ -37,6 +37,9 @@ export default function NavBar() {
                 ) : (
                     <>
                         <li>
+                            <Link to="/"><button>Home</button></Link>
+                        </li>
+                        <li>
                             <Link to="/register"><button>Register</button></Link>
                         </li>
                         <li>
