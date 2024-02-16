@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import AddMediaToWatchListSelect from "../components/AddMediaItemToWatchList";
 
 interface MovieDetails {
   id: number;
@@ -45,7 +46,14 @@ export default function MovieDetails() {
     return <div>Loading...</div>;
   }
 
+  const mediaItemDTO = {
+    tmdbId: movieDetails.id,
+    mediaType: "movie"
+}
+  const mediaTitle = movieDetails.title;
+
   return (
+    <>
     <div key={movieDetails.id}>
       <h1>{movieDetails.title}</h1>
       <img
@@ -55,5 +63,7 @@ export default function MovieDetails() {
       <p>{movieDetails.tagline}</p>
       <p>{movieDetails.overview}</p>
     </div>
+    <AddMediaToWatchListSelect mediaItemDTO={mediaItemDTO} mediaTitle={mediaTitle} />
+    </>
   );
 }
