@@ -1,11 +1,9 @@
-import CreateNewWatchListForm from "../components/CreateNewWatchList";
-import DisplayAllWatchLists from "../components/ViewWatchLists"
+import ProfileButton from "../components/ProfileButton";
 
 export default function Home () {
     return (
         <>
-            <CreateNewWatchListForm />
-            <DisplayAllWatchLists />
+            <ProfileButton />
         </>
     )
 }
