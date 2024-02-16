@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchGetWatchLists } from './ViewWatchLists'
+import { fetchGetWatchLists } from "./ViewWatchLists";
 
 interface MediaItemDTO {
   tmdbId: number;
@@ -18,7 +18,8 @@ interface AddMediaToWatchListProps {
 }
 
 export default function AddMediaToWatchListSelect({
-  mediaItemDTO, mediaTitle
+  mediaItemDTO,
+  mediaTitle,
 }: AddMediaToWatchListProps) {
   const [watchLists, setWatchLists] = useState<WatchList[]>([]);
   const [selectedWatchList, setSelectedWatchList] = useState<number | null>(
@@ -39,43 +40,61 @@ export default function AddMediaToWatchListSelect({
   }, []);
 
   const handleAddToWatchList = async () => {
+    if (!selectedWatchList) {
+      console.error("Please select a valid Watch List");
+      return;
+    }
     if (!selectedWatchList || !mediaItemDTO.mediaType) {
       try {
-        const [movieResult, tvResult]: [Response, Response] = await Promise.all([
-          fetch(`https://api.themoviedb.org/3/movie/${mediaItemDTO.tmdbId}?api_key=${'8f41637da57e52055177463bf9873dc2'}`),
-          fetch(`https://api.themoviedb.org/3/tv/${mediaItemDTO.tmdbId}?api_key=${'8f41637da57e52055177463bf9873dc2'}`),
-        ])
-        const [movieData, tvData]: [any, any] = await Promise.all([movieResult.json(), tvResult.json()])
+        const [movieResult, tvResult]: [Response, Response] = await Promise.all(
+          [
+            fetch(
+              `https://api.themoviedb.org/3/movie/${
+                mediaItemDTO.tmdbId
+              }?api_key=${"8f41637da57e52055177463bf9873dc2"}`
+            ),
+            fetch(
+              `https://api.themoviedb.org/3/tv/${
+                mediaItemDTO.tmdbId
+              }?api_key=${"8f41637da57e52055177463bf9873dc2"}`
+            ),
+          ]
+        );
+        const [movieData, tvData]: [any, any] = await Promise.all([
+          movieResult.json(),
+          tvResult.json(),
+        ]);
 
         if (movieData.title === mediaTitle) {
-          mediaItemDTO.mediaType = 'movie'
+          mediaItemDTO.mediaType = "movie";
         } else if (tvData.name === mediaTitle) {
-          mediaItemDTO.mediaType = 'tv'
-         } else {
+          mediaItemDTO.mediaType = "tv";
+        } else {
           console.error("Media type could not be determined");
           return;
-         }
+        }
       } catch (error) {
         console.error("Error fetching media details: ", error);
         return;
       }
     }
 
-      try {
-        const response = await fetch(
-          `http://localhost:8080/api/media-item/add-to-watchlist/${Number(selectedWatchList)}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(mediaItemDTO),
-            credentials: 'include',
-          }
-        );
-        const result = await response.json();
-        return result;
-      
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/media-item/add-to-watchlist/${Number(
+          selectedWatchList
+        )}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(mediaItemDTO),
+          credentials: "include",
+        }
+      );
+      const result = await response.json();
+      return result;
     } catch (error) {
       console.error("Error adding media item to watchlist: ", error);
     }
@@ -90,7 +109,7 @@ export default function AddMediaToWatchListSelect({
               setSelectedWatchList(Number(event.target.value))
             }
           >
-            <option value="" disabled>
+            <option value="" disabled selected>
               Select a Watch List
             </option>
             {watchLists.map((watchList) => (
@@ -100,7 +119,9 @@ export default function AddMediaToWatchListSelect({
             ))}
           </select>
 
-          <button type="button" onClick={handleAddToWatchList}>Add</button>
+          <button type="button" onClick={handleAddToWatchList}>
+            Add
+          </button>
         </form>
       </div>
     </>
