@@ -12,8 +12,7 @@ export const SearchBar = () => {
 useEffect(()=> {
     if (search !== ""){
         const url = (
-            'https://api.themoviedb.org/3/search/movie?' +
-            new URLSearchParams({search}).toString() + 'include_adult=false&language=en-US&page=1'
+            'https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=1'
           );
         const options = {
             method: 'GET',
