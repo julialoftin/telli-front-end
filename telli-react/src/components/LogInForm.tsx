@@ -15,6 +15,7 @@ async function fetchLoginAPI(logInFormInfo: LogInFormInfo) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(logInFormInfo),
+        credentials: 'include',
       }
     );
     return await response.json();

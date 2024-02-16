@@ -17,7 +17,13 @@ export default function DisplayAllWatchLists() {
 
   async function fetchGetWatchLists() {
     try {
-      const response = await fetch("http://localhost:8080/api/get-watchlists");
+      const response = await fetch("http://localhost:8080/api/watchlist/get-all", {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      });
       const result = await response.json();
       setWatchLists(result);
     } catch (error) {

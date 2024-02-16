@@ -18,6 +18,7 @@ const NavBar: React.FC<NavBarProps> = ({ isLoggedIn, setIsLoggedIn }) => {
             headers: {
               "Content-Type": "application/json",
             },
+            credentials: 'include',
           }
         );
         if (response.ok) {
@@ -29,7 +30,7 @@ const NavBar: React.FC<NavBarProps> = ({ isLoggedIn, setIsLoggedIn }) => {
       }
     };
     checkLoggedInStatus();
-  }, []); // Empty dependency array, effect runs when component mounts
+  }, [setIsLoggedIn]);
 
   return (
     <>

@@ -16,6 +16,7 @@ async function fetchRegisterAPI(registerFormInfo: RegisterFormInfo) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(registerFormInfo),
+        credentials: 'include',
       }
     );
     return await response.json();

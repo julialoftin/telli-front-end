@@ -1,9 +1,11 @@
-import NavBar from "../components/NavBar";
+import CreateNewWatchListForm from "../components/CreateNewWatchList";
+import DisplayAllWatchLists from "../components/ViewWatchLists"
 
 export default function Home () {
     return (
         <>
-            
+            <CreateNewWatchListForm />
+            <DisplayAllWatchLists />
         </>
     )
 }
