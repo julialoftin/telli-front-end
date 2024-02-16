@@ -1,9 +1,15 @@
 import ProfileButton from "../components/ProfileButton";
 
-export default function Home () {
+interface HomeProps {
+    isLoggedIn: boolean;
+  }
+
+const Home: React.FC<HomeProps> = ({ isLoggedIn }) => {
     return (
         <>
-            <ProfileButton />
+            {isLoggedIn && <ProfileButton />}
         </>
     )
 }
+
+export default Home;

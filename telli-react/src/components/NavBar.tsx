@@ -6,8 +6,7 @@ interface NavBarProps {
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const NavBar: React.FC<NavBarProps> = ({ isLoggedIn, setIsLoggedIn }) => {
+  const NavBar: React.FC<NavBarProps> = ({ isLoggedIn, setIsLoggedIn }) => {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     const checkLoggedInStatus = async () => {
