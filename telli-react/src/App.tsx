@@ -8,6 +8,8 @@ import NavBar from './components/NavBar'
 import Profile from './pages/Profile'
 import MovieDetails from './pages/MovieDetails'
 import ViewWatchListMediaItemsComponent from './components/ViewWatchListMediaItems'
+import ViewTagByMediaItem from './components/ViewTagByMediaItem'
+import ViewAllMediaItemsWithTagLinkComponent from './components/ViewAllMediaItemsWithTagLinkComponent'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,6 +25,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="/watchlist/:id" element={<ViewWatchListMediaItemsComponent />} />
+          <Route path="/media-item/:id" element={<ViewAllMediaItemsWithTagLinkComponent />} />
           
         </Routes>
       </BrowserRouter>

@@ -34,23 +34,6 @@ export default function DisplayAllWatchLists() {
     null
   );
 
-  // async function fetchGetWatchLists(): Promise<WatchList[]> {
-  //   try {
-  //     const response = await fetch("http://localhost:8080/api/watchlist/get-all", {
-  //       method: "GET",
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       credentials: 'include'
-  //     });
-  //     const result = await response.json();
-  //     setWatchLists(result);
-  //     return result;
-  //   } catch (error) {
-  //     console.error("Error retrieving Watch Lists: ", error);
-  //     return [];
-  //   }
-  // }
   useEffect(() => {
     async function fetchData() {
       const data = await fetchGetWatchLists();

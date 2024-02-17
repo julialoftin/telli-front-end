@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import AddMediaToWatchListSelect from "../components/AddMediaItemToWatchList";
 import TagForm from "../components/TagForm";
 import TagSelect from "../components/TagSelect";
+import ViewTagByMediaItem from "../components/ViewTagByMediaItem";
 
 interface MovieDetails {
   id: number;
@@ -69,6 +70,7 @@ export default function MovieDetails() {
     <AddMediaToWatchListSelect mediaItemDTO={mediaItemDTO} mediaTitle={mediaTitle} />
     <TagForm />
     <TagSelect mediaItemDTO={mediaItemDTO} />
+    <ViewTagByMediaItem mediaItemDTO={mediaItemDTO} />
     </>
   );
 }
