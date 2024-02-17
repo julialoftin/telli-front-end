@@ -40,7 +40,6 @@ export default function MediaFeed() {
       try {
         const response = await getPopularMovies();
         setPopularMovies(response.results)
-        console.log(popularMovies);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
