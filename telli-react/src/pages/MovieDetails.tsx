@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AddMediaToWatchListSelect from "../components/AddMediaItemToWatchList";
+import TagForm from "../components/TagForm";
 
 interface MovieDetails {
   id: number;
@@ -65,6 +66,7 @@ export default function MovieDetails() {
       <p>{movieDetails.overview}</p>
     </div>
     <AddMediaToWatchListSelect mediaItemDTO={mediaItemDTO} mediaTitle={mediaTitle} />
+    <TagForm />
     </>
   );
 }
