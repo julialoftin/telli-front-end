@@ -19,13 +19,14 @@ export default function MovieDetails() {
   useEffect(() => {
     // Fetch movie details using the movie ID from the route params
     const fetchMovieDetails = async () => {
+      const apiToken = import.meta.env.VITE_APP_API_TOKEN;
       const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
       const options = {
         method: "GET",
         headers: {
           accept: "application/json",
           Authorization:
-            "Bearer ",
+          `Bearer ${apiToken}`,
         },
       };
 
