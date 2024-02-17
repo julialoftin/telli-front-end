@@ -8,6 +8,7 @@ interface PopularMovie {
   // Add other properties as needed
 }
 async function getPopularMovies() {
+  const apiToken = import.meta.env.VITE_APP_API_TOKEN;
   const url =
     "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
   const options = {
@@ -15,7 +16,7 @@ async function getPopularMovies() {
     headers: {
       accept: "application/json",
       Authorization:
-        "Bearer ",
+        `Bearer ${apiToken}`,
     },
   };
 
