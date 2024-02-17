@@ -8,7 +8,6 @@ import NavBar from './components/NavBar'
 import Profile from './pages/Profile'
 import MovieDetails from './pages/MovieDetails'
 import ViewWatchListMediaItemsComponent from './components/ViewWatchListMediaItems'
-import ViewTagByMediaItem from './components/ViewTagByMediaItem'
 import ViewAllMediaItemsWithTagLinkComponent from './components/ViewAllMediaItemsWithTagLinkComponent'
 
 function App() {
