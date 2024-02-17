@@ -108,8 +108,9 @@ export default function AddMediaToWatchListSelect({
             onChange={(event) =>
               setSelectedWatchList(Number(event.target.value))
             }
+            value={selectedWatchList || ""}
           >
-            <option value="" disabled selected>
+            <option value="" disabled >
               Select a Watch List
             </option>
             {watchLists.map((watchList) => (
