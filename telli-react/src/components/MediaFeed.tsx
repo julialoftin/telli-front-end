@@ -8,14 +8,14 @@ interface PopularMovie {
   // Add other properties as needed
 }
 async function getPopularMovies() {
+  const apiToken = import.meta.env.VITE_APP_API_TOKEN;
   const url =
     "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        "Bearer",
+      Authorization: `Bearer ${apiToken}`,
     },
   };
 
@@ -39,7 +39,7 @@ export default function MediaFeed() {
     async function fetchData() {
       try {
         const response = await getPopularMovies();
-        setPopularMovies(response.results)
+        setPopularMovies(response.results);
         console.log(popularMovies);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -55,11 +55,11 @@ export default function MediaFeed() {
         {popularMovies.map((movie) => (
           <div key={movie.id} className="movie-item">
             <a href={`/movie/${movie.id}`}>
-            <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={movie.title}
-            />
-            <h2>{movie.title}</h2>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title}
+              />
+              <h2>{movie.title}</h2>
             </a>
           </div>
         ))}
