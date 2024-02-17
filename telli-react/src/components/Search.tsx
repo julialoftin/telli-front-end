@@ -6,13 +6,13 @@ export const SearchBar = () => {
   const [search, setSearch] = useState("")
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
+    setSearch(event.target.value as string);
   };
 
   useEffect(() => {
     if (search !== "") {
       const url = (
-        'https://api.themoviedb.org/3/search/movie?query=' + {search} + '&include_adult=false&language=en-US&page=1'
+        `https://api.themoviedb.org/3/search/movie?query=${search as string}&include_adult=false&language=en-US&page=1`
       );
       const options = {
         method: 'GET',
@@ -30,7 +30,7 @@ export const SearchBar = () => {
   }, [search])
 
   const xhReq = new XMLHttpRequest();
-  xhReq.open("GET", 'https://api.themoviedb.org/3/search/movie?query=' +{search} +'&include_adult=false&language=en-US&page=1', false);
+  xhReq.open("GET", `https://api.themoviedb.org/3/search/movie?query=${search as string}&include_adult=false&language=en-US&page=1`, false);
   xhReq.send(null);
   const jsonObject = JSON.parse(xhReq.responseText);
   const arr = Object.keys(jsonObject).map((key) => [key, jsonObject[key]]);
@@ -58,6 +58,6 @@ export const SearchBar = () => {
     </div>
 
   )
-  //array dummy data, map through array of objects, display key
+
 }
 
