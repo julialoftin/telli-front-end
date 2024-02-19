@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { ChangeEvent } from 'react';
 
+interface MovieData{
+  title: string
+}
 
 export const SearchBar = () => {
   const [search, setSearch] = useState("")
-
+  const [movieData, setMovieData] = useState<MovieData[]>([])
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value as string);
   };
 
   useEffect(() => {
-    if (search !== "") {
+    async function getMovieData() {
       const url = (
         `https://api.themoviedb.org/3/search/movie?query=${search as string}&include_adult=false&language=en-US&page=1`
       );
@@ -22,18 +25,17 @@ export const SearchBar = () => {
         }
       };
 
-      fetch(url, options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
-    }
+      try {
+        const response = await fetch(url, options);
+        const json = await response.json();
+        const dataResponse = json.results;
+        setMovieData(dataResponse);
+      } catch (error) {
+        console.error("Error fetching movie details:", error);
+      }
+    };
+    getMovieData();
   }, [search])
-
-  const xhReq = new XMLHttpRequest();
-  xhReq.open("GET", `https://api.themoviedb.org/3/search/movie?query=${search as string}&include_adult=false&language=en-US&page=1`, false);
-  xhReq.send(null);
-  const jsonObject = JSON.parse(xhReq.responseText);
-  const arr = Object.keys(jsonObject).map((key) => [key, jsonObject[key]]);
 
   return (
     <div className="input-wrapper">Search Bar
@@ -43,16 +45,15 @@ export const SearchBar = () => {
         value={search} >
       </input>
       {
-        arr.map((title) => {
-
-          return (
+        movieData.map((result) => (
+          
             <div >
               <p>
-                Movie Title: {arr[1][1][0].title}
+                Movie Title: {result.title}
               </p>
             </div>
-          )
-        })
+          
+        ))
 
       }
     </div>
@@ -61,3 +62,12 @@ export const SearchBar = () => {
 
 }
 
+//movie details endpoint
+//on click call with react routing
+//search results each p tag would be wrapped in anchor tag
+//media feed
+//put id in interface
+//anchor tag just 
+//div needs key=id
+//tag module with radio buttons , name of each button would be a tag, grab 
+//filter by genre******
