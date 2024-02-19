@@ -4,6 +4,8 @@ import AddMediaToWatchListSelect from "../components/AddMediaItemToWatchList";
 import TagForm from "../components/TagForm";
 import TagSelect from "../components/TagSelect";
 import ViewTagByMediaItem from "../components/ViewTagByMediaItem";
+import ReviewForm from "../components/ReviewForm";
+import ViewReviewsByMediaItem from "../components/ViewReviewsByMediaItem";
 
 interface MovieDetails {
   id: number;
@@ -71,6 +73,8 @@ export default function MovieDetails() {
     <TagForm />
     <TagSelect mediaItemDTO={mediaItemDTO} />
     <ViewTagByMediaItem mediaItemDTO={mediaItemDTO} />
+    <ReviewForm mediaItemDTO={mediaItemDTO} />
+    <ViewReviewsByMediaItem mediaItemDTO={mediaItemDTO} />
     </>
   );
 }

@@ -37,7 +37,7 @@ export default function ViewTagByMediaItem({mediaItemDTO}: ViewTagByMediaItemPro
                 console.log(result);
                 return result;
             } catch (error) {
-                console.error("Error adding tag to media item: ", error);
+                console.error("Error fetching tag by media item: ", error);
             }
         };
         fetchTagsByMediaItem();
