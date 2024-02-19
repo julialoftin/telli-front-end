@@ -11,12 +11,13 @@ export default function DeleteWatchListButton({
     if (confirm("Your Watch List will be deleted permanently!")) {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/delete-watchlist/${watchListId}`,
+          `http://localhost:8080/api/watchlist/delete-watchlist/${watchListId}`,
           {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
             },
+            credentials: 'include',
           }
         );
         if (response.ok) {

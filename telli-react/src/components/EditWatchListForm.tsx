@@ -18,13 +18,14 @@ async function fetchEditWatchList(
 ) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/edit-watchlist/${watchListId}`,
+      `http://localhost:8080/api/watchlist/edit-watchlist/${watchListId}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(editWatchListDTO),
+        credentials: 'include',
       }
     );
     return response;
