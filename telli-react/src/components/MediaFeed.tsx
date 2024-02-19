@@ -48,6 +48,7 @@ export default function MediaFeed() {
 
     fetchData();
   }, []);
+  
   return (
     <>
       <h1>Popular Movies</h1>
