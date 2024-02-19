@@ -9,14 +9,21 @@ export interface WatchList {
   description: string;
 }
 
-export async function fetchGetWatchLists() {
+export async function fetchGetWatchLists(): Promise<WatchList[]> {
   try {
-    const response = await fetch("http://localhost:8080/api/get-watchlists");
+    const response = await fetch("http://localhost:8080/api/watchlist/get-all", {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    });
     const result = await response.json();
+    // setWatchLists(result);
     return result;
-    
   } catch (error) {
     console.error("Error retrieving Watch Lists: ", error);
+    return [];
   }
 }
 
@@ -27,12 +34,14 @@ export default function DisplayAllWatchLists() {
   );
 
   useEffect(() => {
-    async function fetchData () {
-      const result = await fetchGetWatchLists();
-      setWatchLists(result);
+    async function fetchData() {
+      const data = await fetchGetWatchLists();
+      setWatchLists(data);
     }
 
-    if (watchLists.length === 0) fetchData();
+    if (watchLists.length === 0) {
+      fetchData();
+    }
   }, [watchLists]);
 
   const handleEditClick = (watchList: WatchList) => {

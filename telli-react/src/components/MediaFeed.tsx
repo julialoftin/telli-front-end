@@ -16,7 +16,7 @@ async function getPopularMovies() {
     headers: {
       accept: "application/json",
       Authorization:
-        `Bearer ${apiToken}`,
+      `Bearer ${apiToken}`,
     },
   };
 
@@ -41,6 +41,7 @@ export default function MediaFeed() {
       try {
         const response = await getPopularMovies();
         setPopularMovies(response.results)
+        console.log(popularMovies);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
