@@ -7,6 +7,7 @@ import LogIn from './pages/LogIn'
 import NavBar from './components/NavBar'
 import Profile from './pages/Profile'
 import MovieDetails from './pages/MovieDetails'
+import ViewWatchListMediaItemsComponent from './components/ViewWatchListMediaItems'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,6 +22,7 @@ function App() {
           <Route path="/register" element={<Register setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/watchlist/:id" element={<ViewWatchListMediaItemsComponent />} />
           
         </Routes>
       </BrowserRouter>

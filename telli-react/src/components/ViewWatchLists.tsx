@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import EditWatchListForm from "./EditWatchListForm";
 import DeleteWatchListButton from "./DeleteWatchListButton";
 import EditWatchListButton from "./EditWatchListButton";
+import { Link } from "react-router-dom"
 
 export interface WatchList {
   id: number;
@@ -76,7 +77,7 @@ export default function DisplayAllWatchLists() {
                 />
               ) : (
                 <>
-                  <h3>{watchList.name}</h3>
+                  <Link to={`/watchlist/${watchList.id}`}>{watchList.name}</Link>
                   <p>{watchList.description}</p>
                   <EditWatchListButton onClick={() => handleEditClick(watchList)} />
                   <DeleteWatchListButton onDelete={fetchGetWatchLists} watchListId={watchList.id} />

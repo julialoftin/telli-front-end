@@ -50,6 +50,7 @@ export default function MovieDetails() {
   const mediaItemDTO = {
     tmdbId: movieDetails.id,
     mediaType: "movie"
+}
 
   const mediaTitle = movieDetails.title;
 
