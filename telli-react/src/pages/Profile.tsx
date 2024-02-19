@@ -1,5 +1,6 @@
 import CreateNewWatchListForm from "../components/CreateNewWatchList";
 import TagForm from "../components/TagForm";
+import ViewReviewsLoggedInUser from "../components/ViewReviewsLoggedInUser";
 import DisplayAllWatchLists from "../components/ViewWatchLists"
 
 export default function Profile () {
@@ -8,6 +9,7 @@ export default function Profile () {
             <CreateNewWatchListForm />
             <DisplayAllWatchLists />
             <TagForm />
+            <ViewReviewsLoggedInUser />
         </>
     )
 }
