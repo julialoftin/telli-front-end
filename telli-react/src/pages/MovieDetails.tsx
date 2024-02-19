@@ -51,6 +51,7 @@ export default function MovieDetails() {
     tmdbId: movieDetails.id,
     mediaType: "movie"
 }
+
   const mediaTitle = movieDetails.title;
 
   return (
