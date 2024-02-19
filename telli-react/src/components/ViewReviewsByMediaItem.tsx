@@ -1,9 +1,4 @@
-import React, { useEffect, useState } from "react";
-
-interface ReviewDTO {
-  title: string;
-  reviewBody: string;
-}
+import { useEffect, useState } from "react";
 
 interface Review {
     id: number;
