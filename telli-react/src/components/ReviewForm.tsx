@@ -97,9 +97,10 @@ export default function ReviewForm({ mediaItemDTO }: AddReviewToMediaItem) {
                 cols={50}
                 required
                 placeholder="Write your review here!"
+                
               ></textarea>
             </label>
-            <input type="submit" value="Post"></input>
+            <button type="submit" >Post</button>
           </form>
         </div>
       )}

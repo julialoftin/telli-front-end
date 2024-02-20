@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
 import ReviewForm from "../components/ReviewForm";
+import TagForm from "../components/TagForm";
+import TagSelect from "../components/TagSelect";
 
 interface MediaItemDTO {
     tmdbId: number;
@@ -25,6 +27,8 @@ const WriteAReview = () => {
                 <p>{movieDetails.tagline}</p>
             </div>
             <ReviewForm mediaItemDTO={mediaItemDTO} />
+            <TagForm />
+            <TagSelect mediaItemDTO={mediaItemDTO} />
         </>
     )
 }

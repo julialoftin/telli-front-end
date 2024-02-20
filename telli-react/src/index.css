@@ -132,8 +132,17 @@ label.review-label {
 
 }
 
-.review-form > input {
-  
+#title, #reviewBody {
+  margin-bottom: 0.5em;
+}
+
+/* Tag form name input */
+#name {
+  margin-right: 0.5em;
+}
+
+.tag-select {
+  margin-right: 0.5em;
 }
 
 .movieDetails {
