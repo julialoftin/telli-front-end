@@ -19,7 +19,6 @@ interface MediaItemDetails {
 }
 
 async function fetchMediaItemsById(id: (string | undefined)) {
-  // const { id } = useParams();
   try {
     const response = await fetch(
       `http://localhost:8080/api/media-item/get-items-in-watchlist/${id}`,
@@ -66,25 +65,6 @@ export default function ViewWatchListMediaItemsComponent() {
         console.error("Error retrieving Watch List: ", error);
       }
     }
-
-    // async function fetchMediaItemsById() {
-    //   try {
-    //     const response = await fetch(
-    //       `http://localhost:8080/api/media-item/get-items-in-watchlist/${id}`,
-    //       {
-    //         method: "GET",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         credentials: "include",
-    //       }
-    //     );
-    //     const result = await response.json();
-    //     setMediaItems(result);
-    //   } catch (error) {
-    //     console.error("Error retrieving Media Items: ", error);
-    //   }
-    // }
 
     const fetchAllMediaItems = async () => {
       const results = await fetchMediaItemsById(id);
