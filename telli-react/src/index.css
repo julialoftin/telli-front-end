@@ -86,7 +86,6 @@ h1.movie-feed-title {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  place-content: center;
 }
 
 .movie-item {
@@ -97,4 +96,22 @@ h1.movie-feed-title {
 .movie-item img {
   max-width: 100%;
   height: auto;
+}
+
+.movie-list-media-feed {
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+  gap: 2vw;
+}
+
+.movie-item-media-feed {
+  width: 200px;
+  border-radius: 8px;
+}
+
+.movie-item-media-feed img {
+  max-width: 100%;
+  height: auto;
+  
 }
