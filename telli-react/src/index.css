@@ -11,6 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin-left: 2vw;
+  margin-right: 2vw;
 }
 
 a {
@@ -74,10 +76,17 @@ button:focus-visible {
   }
 }
 
+h1.movie-feed-title {
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+}
+
 .movie-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  place-content: center;
 }
 
 .movie-item {
