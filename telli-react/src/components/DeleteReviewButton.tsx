@@ -33,7 +33,7 @@ const DeleteReviewButton = ({
 
   return (
     <>
-      <button type="button" onClick={handleDelete}>Delete</button>
+      <button type="button" onClick={handleDelete} className="delete-button">Delete</button>
     </>
   );
 };
