@@ -145,11 +145,13 @@ export default function ViewWatchListMediaItemsComponent() {
           <div className="movie-list">
             {mediaDetails.map((mediaDetail) => (
               <div className="movie-item" key={mediaDetail.tmdbId}>
+                <a href={`/movie/${mediaDetail.tmdbId}`}>
                 <img
                   src={`https://image.tmdb.org/t/p/w500${mediaDetail.poster_path}`}
                   alt={mediaDetail.title}
                 />
                 <p>{mediaDetail.title}</p>
+                </a>
                 <p>{mediaDetail.tagline}</p>
                 <p>{mediaDetail.overview}</p>
               </div>

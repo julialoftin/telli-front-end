@@ -70,7 +70,7 @@ export default function ViewAllMediaItemsWithTagLinkComponent() {
               tmdbId: mediaItem.tmdbId,
               title: movieData.title,
               overview: movieData.overview,
-            //   mediaType: "movie",
+              //   mediaType: "movie",
               poster_path: movieData.poster_path,
               // Add other properties as needed
             };
@@ -108,21 +108,23 @@ export default function ViewAllMediaItemsWithTagLinkComponent() {
 
   return (
     <>
-        <div>
+      <div>
         {mediaDetails && (
           <>
-          <div className="movie-list">
-            {mediaDetails.map((mediaDetail) => (
-              <div className="movie-item" key={mediaDetail.tmdbId}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${mediaDetail.poster_path}`}
-                  alt={mediaDetail.title}
-                />
-                <p>{mediaDetail.title}</p>
-                <p>{mediaDetail.tagline}</p>
-                <p>{mediaDetail.overview}</p>
-              </div>
-            ))}
+            <div className="movie-list">
+              {mediaDetails.map((mediaDetail) => (
+                <div className="movie-item" key={mediaDetail.tmdbId}>
+                  <a href={`/movie/${mediaDetail.tmdbId}`}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${mediaDetail.poster_path}`}
+                      alt={mediaDetail.title}
+                    />
+                    <p>{mediaDetail.title}</p>
+                  </a>
+                  <p>{mediaDetail.tagline}</p>
+                  <p>{mediaDetail.overview}</p>
+                </div>
+              ))}
             </div>
           </>
         )}

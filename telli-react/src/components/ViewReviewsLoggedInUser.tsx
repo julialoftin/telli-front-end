@@ -114,6 +114,9 @@ export default function ViewReviewsLoggedInUser() {
         setMediaDetails([]);
       }
     }
+    if (reviews === undefined) {
+        return setReviews([]);
+    }
     if (reviews.length > 0 && mediaDetails === undefined) {
       fetchMediaDetails();
     }
@@ -152,10 +155,8 @@ export default function ViewReviewsLoggedInUser() {
                       <h4>{review.title}</h4>
                       <p>{review.reviewBody}</p>
                     </div>
-                    <DeleteReviewButton
-                      reviewId={review.id}
-                      onDelete={fetchReviewsByUser}
-                    />
+                    <DeleteReviewButton reviewId={review.id}
+                        onDelete={() => {fetchReviewsByUser().then((updatedReviews) => setReviews(updatedReviews))}} />
                   </div>
                 );
               })}
