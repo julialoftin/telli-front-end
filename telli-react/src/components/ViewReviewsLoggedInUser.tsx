@@ -140,18 +140,20 @@ export default function ViewReviewsLoggedInUser() {
                       <div>
                         {eachMediaDetail && (
                           <>
+                          <a href={`/movie/${eachMediaDetail.tmdbId}`}>
                             <img
-                              src={`https://image.tmdb.org/t/p/w500/${eachMediaDetail?.poster_path}`}
-                              alt={eachMediaDetail?.title}
+                              src={`https://image.tmdb.org/t/p/w500/${eachMediaDetail.poster_path}`}
+                              alt={eachMediaDetail.title}
                             />
-                            <h2>{eachMediaDetail?.title}</h2>
-                            <h4>{eachMediaDetail?.tagline}</h4>
+                            <h2>{eachMediaDetail.title}</h2>
+                            </a>
+                            <h4>{eachMediaDetail.tagline}</h4>
                           </>
                         )}
                       </div>
                     </div>
                     <div>
-                      <p>{review.user.username}</p>
+                      <p className="review-user-username">{review.user.username}</p>
                       <h4>{review.title}</h4>
                       <p>{review.reviewBody}</p>
                     </div>
