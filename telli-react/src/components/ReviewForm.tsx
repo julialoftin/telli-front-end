@@ -24,7 +24,7 @@ async function fetchCreateReview(
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({reviewDTO, mediaItemDTO}),
+      body: JSON.stringify({ reviewDTO, mediaItemDTO }),
       credentials: "include",
     });
     return response;
@@ -49,7 +49,9 @@ export default function ReviewForm({ mediaItemDTO }: AddReviewToMediaItem) {
     };
 
     try {
-      const response = await fetchCreateReview(reviewFormInfo, {mediaItemDTO});
+      const response = await fetchCreateReview(reviewFormInfo, {
+        mediaItemDTO,
+      });
       if (response) {
         if (response.ok) {
           setIsSubmissionSuccessful(true);
@@ -69,7 +71,7 @@ export default function ReviewForm({ mediaItemDTO }: AddReviewToMediaItem) {
 
   return (
     <>
-      <h2>Post a Review!</h2>
+      <h2>Write a Review!</h2>
       {isSubmissionSuccessful ? (
         <p>Review posted!</p>
       ) : (

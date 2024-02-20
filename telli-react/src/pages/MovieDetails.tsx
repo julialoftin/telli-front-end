@@ -4,7 +4,6 @@ import AddMediaToWatchListSelect from "../components/AddMediaItemToWatchList";
 import TagForm from "../components/TagForm";
 import TagSelect from "../components/TagSelect";
 import ViewTagByMediaItem from "../components/ViewTagByMediaItem";
-import ReviewForm from "../components/ReviewForm";
 import ViewReviewsByMediaItem from "../components/ViewReviewsByMediaItem";
 import PostAReviewButton from "../components/PostAReviewButton";
 
@@ -14,6 +13,7 @@ interface MovieDetails {
   title: string;
   tagline: string;
   overview: string;
+  backdrop_path: string;
 }
 
 export default function MovieDetails() {
@@ -23,7 +23,6 @@ export default function MovieDetails() {
   );
 
   useEffect(() => {
-    // Fetch movie details using the movie ID from the route params
     const fetchMovieDetails = async () => {
       const apiToken = import.meta.env.VITE_APP_API_TOKEN;
       const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
@@ -80,8 +79,7 @@ export default function MovieDetails() {
         <TagSelect mediaItemDTO={mediaItemDTO} />
         <ViewTagByMediaItem mediaItemDTO={mediaItemDTO} />
         <ViewReviewsByMediaItem mediaItemDTO={mediaItemDTO} />
-        <PostAReviewButton mediaItemDTO={mediaItemDTO} />
-        {/* <ReviewForm mediaItemDTO={mediaItemDTO} /> */}
+        <PostAReviewButton mediaItemDTO={mediaItemDTO} movieDetails={movieDetails} />
       </div>
     </>
   );
