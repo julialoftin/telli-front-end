@@ -50,6 +50,7 @@ export default function ViewReviewsByMediaItem({mediaItemDTO}: ViewReviewsByMedi
     return (
         <>
             <div>
+                <h2>Reviews</h2>
                 {reviews.map((review) => (
                     <div key={review.id}>
                         <p>{review.user.username}</p>

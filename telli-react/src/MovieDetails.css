@@ -1,0 +1,13 @@
+.movieDetails {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tagline {
+    font-size: 1.2em;
+}
+
+.movieDetails img {
+    border-radius: 15px;
+    max-height: 60vh;
+}
