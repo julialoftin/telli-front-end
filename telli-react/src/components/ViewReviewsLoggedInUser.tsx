@@ -136,7 +136,7 @@ export default function ViewReviewsLoggedInUser() {
 
                 return (
                   <div key={review.id}>
-                    <div className="movie-list" >
+                    <div className="movie-list">
                       <div className="movie-item">
                         <div>
                           {eachMediaDetail && (
@@ -159,16 +159,16 @@ export default function ViewReviewsLoggedInUser() {
                         </p>
                         <h4>{review.title}</h4>
                         <p>{review.reviewBody}</p>
+                        <DeleteReviewButton
+                          reviewId={review.id}
+                          onDelete={() => {
+                            fetchReviewsByUser().then((updatedReviews) =>
+                              setReviews(updatedReviews)
+                            );
+                          }}
+                        />
                       </div>
                     </div>
-                    <DeleteReviewButton
-                      reviewId={review.id}
-                      onDelete={() => {
-                        fetchReviewsByUser().then((updatedReviews) =>
-                          setReviews(updatedReviews)
-                        );
-                      }}
-                    />
                   </div>
                 );
               })}

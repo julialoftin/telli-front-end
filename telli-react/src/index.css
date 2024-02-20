@@ -24,24 +24,11 @@ a:hover {
   color: #535bf2;
 }
 
-/* body {
-  margin: 0;
-  display: flex;
-  place-items: center; 
-  min-width: 320px;
-  min-height: 100vh;
-} */
-
 body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
-
-  /* h1 {
-    font-size: 3.2em;
-    line-height: 1.1;
-  } */
 
 button {
   border-radius: 8px;
@@ -86,9 +73,6 @@ button:focus-visible {
 .movie-list {
   display: flex;
   flex-direction: row;
-  /* max-width: 20vw; */
-  /* flex-wrap: wrap; */
-  /* gap: 20px; */
 }
 
 .review-by-user {
@@ -101,16 +85,16 @@ button:focus-visible {
   margin-left: 10vw;
 }
 
+.delete-button {
+  max-width: 20%;
+}
+
 .movie-item {
   max-width: 20vw;
-  /* border-radius: 8px; */
 }
 
 .movie-item img {
-  /* display: flex; */
-  /* flex-wrap: wrap; */
   max-width: 20vw;
-  /* height: auto; */
 }
 
 h1.movie-feed-title {
