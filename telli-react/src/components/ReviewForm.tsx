@@ -71,37 +71,37 @@ export default function ReviewForm({ mediaItemDTO }: AddReviewToMediaItem) {
 
   return (
     <>
-      <h2>Write a Review!</h2>
+      <h2 className="review-title">Write a Review!</h2>
       {isSubmissionSuccessful ? (
         <p>Review posted!</p>
       ) : (
-        <form onSubmit={handleReviewFormSubmission}>
-          <label htmlFor="title">
-            Title:
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-              placeholder="Review Title"
-            />
-          </label>
-          <label htmlFor="reviewBody">
-            Description:
-            <textarea
-              id="reviewBody"
-              name="reviewBody"
-              onChange={(e) => setReviewBody(e.target.value)}
-              rows={10}
-              cols={50}
-              required
-              placeholder="Write your review here!"
-            ></textarea>
-          </label>
-          <input type="submit" value="Post"></input>
-        </form>
+        <div className="review-form">
+          <form onSubmit={handleReviewFormSubmission}>
+            <label htmlFor="title" className="review-label">
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+                placeholder="Review Title"
+              />
+            </label>
+            <label htmlFor="reviewBody" className="review-label">
+              <textarea
+                id="reviewBody"
+                name="reviewBody"
+                onChange={(e) => setReviewBody(e.target.value)}
+                rows={10}
+                cols={50}
+                required
+                placeholder="Write your review here!"
+              ></textarea>
+            </label>
+            <input type="submit" value="Post"></input>
+          </form>
+        </div>
       )}
     </>
   );

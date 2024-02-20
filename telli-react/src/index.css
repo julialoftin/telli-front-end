@@ -32,6 +32,12 @@ a:hover {
   min-height: 100vh;
 } */
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
   /* h1 {
     font-size: 3.2em;
     line-height: 1.1;
@@ -76,11 +82,7 @@ button:focus-visible {
   }
 }
 
-h1.movie-feed-title {
-  display: flex;
-  flex-wrap: wrap;
-  place-content: center;
-}
+
 
 .movie-list {
   display: flex;
@@ -98,8 +100,15 @@ h1.movie-feed-title {
   height: auto;
 }
 
+h1.movie-feed-title {
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+}
+
 .movie-list-media-feed {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   place-content: center;
   gap: 2vw;
@@ -114,4 +123,28 @@ h1.movie-feed-title {
   max-width: 100%;
   height: auto;
   
+}
+
+label.review-label {
+  display: flex;
+  flex-direction: row;
+  display: block;
+
+}
+
+.review-form > input {
+  
+}
+
+.movieDetails {
+  flex-wrap: wrap;
+}
+
+.tagline {
+  font-size: 1.2em;
+}
+
+.movieDetails img {
+  border-radius: 15px;
+  max-height: 60vh;
 }
