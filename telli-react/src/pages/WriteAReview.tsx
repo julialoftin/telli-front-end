@@ -38,8 +38,8 @@ const WriteAReview = () => {
       <button onClick={handleAddTag}>Add tag</button>
       {showTags && (
         <>
-          <TagSelect mediaItemDTO={mediaItemDTO} />
           <TagForm />
+          <TagSelect mediaItemDTO={mediaItemDTO} />
         </>
       )}
     </>
