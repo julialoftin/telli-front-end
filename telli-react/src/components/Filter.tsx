@@ -40,20 +40,14 @@ export const Filter = () => {
 
     return (
         <div className="filter-wrapper">Filter by Genre
-            <select name="genre"
-            onSelect={handleInputChange}
-            >
-                <option value="1">action</option>
-                <option value="2">comedy</option>
-            </select>
+
             {
                 movieGenre.map((result) => (
-                    
-                    <div >
-                        <p>
-                            Movie Title: {result.title}
-                        </p>
-                    </div>
+                    <select name="genre"
+                        onSelect={handleInputChange}
+                    >  
+                        <option key={result.genre[0]} value={result.genre[1]}>Action</option>
+                    </select>
 
                 ))
 
