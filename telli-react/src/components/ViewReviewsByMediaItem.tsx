@@ -4,6 +4,10 @@ interface Review {
     id: number;
     title: string;
     reviewBody: string;
+    mediaItem: {
+        tmdbId: number;
+        mediaType: string;
+    },
     user: {
         id: number;
         username: string;
@@ -35,7 +39,6 @@ export default function ViewReviewsByMediaItem({mediaItemDTO}: ViewReviewsByMedi
                 });
                 const result = await response.json();
                 setReviews(result);
-                console.log(result)
                 return result;
             } catch (error) {
                 console.error("Error fetching reviews by media item: ", error);
