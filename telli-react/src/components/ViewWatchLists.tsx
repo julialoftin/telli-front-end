@@ -2,11 +2,30 @@ import { useState, useEffect } from "react";
 import EditWatchListForm from "./EditWatchListForm";
 import DeleteWatchListButton from "./DeleteWatchListButton";
 import EditWatchListButton from "./EditWatchListButton";
+import { Link } from "react-router-dom"
 
 export interface WatchList {
   id: number;
   name: string;
   description: string;
+}
+
+export async function fetchGetWatchLists(): Promise<WatchList[]> {
+  try {
+    const response = await fetch("http://localhost:8080/api/watchlist/get-all", {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    });
+    const result = await response.json();
+    // setWatchLists(result);
+    return result;
+  } catch (error) {
+    console.error("Error retrieving Watch Lists: ", error);
+    return [];
+  }
 }
 
 export default function DisplayAllWatchLists() {
@@ -15,17 +34,15 @@ export default function DisplayAllWatchLists() {
     null
   );
 
-  async function fetchGetWatchLists() {
-    try {
-      const response = await fetch("http://localhost:8080/api/get-watchlists");
-      const result = await response.json();
-      setWatchLists(result);
-    } catch (error) {
-      console.error("Error retrieving Watch Lists: ", error);
-    }
-  }
   useEffect(() => {
-    if (watchLists.length === 0) fetchGetWatchLists();
+    async function fetchData() {
+      const data = await fetchGetWatchLists();
+      setWatchLists(data);
+    }
+
+    if (watchLists.length === 0) {
+      fetchData();
+    }
   }, [watchLists]);
 
   const handleEditClick = (watchList: WatchList) => {
@@ -60,7 +77,7 @@ export default function DisplayAllWatchLists() {
                 />
               ) : (
                 <>
-                  <h3>{watchList.name}</h3>
+                  <Link to={`/watchlist/${watchList.id}`}>{watchList.name}</Link>
                   <p>{watchList.description}</p>
                   <EditWatchListButton onClick={() => handleEditClick(watchList)} />
                   <DeleteWatchListButton onDelete={fetchGetWatchLists} watchListId={watchList.id} />

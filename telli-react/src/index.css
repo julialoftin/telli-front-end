@@ -11,6 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin-left: 2vw;
+  margin-right: 2vw;
 }
 
 a {
@@ -23,22 +25,16 @@ a:hover {
 }
 
 body {
-  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
+  margin-bottom: 0.5em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -53,6 +49,13 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+.message {
+  color: #71cfd9;
+}
+
+.error {
+  color: #821811;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -65,4 +68,91 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.movie-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.review-by-user {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-by-user {
+  max-width: 50vw;
+  margin-left: 10vw;
+}
+
+.delete-button {
+  max-width: 20%;
+}
+
+.movie-item {
+  max-width: 20vw;
+}
+
+.movie-item img {
+  max-width: 20vw;
+}
+
+h1.movie-feed-title {
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+}
+
+.movie-list-media-feed {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  place-content: center;
+  gap: 2vw;
+}
+
+.movie-item-media-feed {
+  width: 200px;
+  border-radius: 8px;
+}
+
+.movie-item-media-feed img {
+  max-width: 100%;
+  height: auto;
+  
+}
+
+label.review-label {
+  display: flex;
+  flex-direction: row;
+}
+
+#title, #reviewBody {
+  margin-bottom: 0.5em;
+}
+
+/* Tag form name input */
+#name {
+  margin-right: 0.5em;
+}
+
+.review-user-username {
+  font-style: italic;
+}
+
+.tag-select {
+  margin-right: 0.5em;
+}
+
+.movieDetails {
+  flex-wrap: wrap;
+}
+
+.tagline {
+  font-size: 1.2em;
+}
+
+.movieDetails img {
+  border-radius: 15px;
+  max-height: 60vh;
 }
