@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import './App.css'
+import CreateNewWatchListForm from './components/CreateNewWatchList'
+import DisplayAllWatchLists from './components/ViewWatchLists'
+import { SearchBar } from './components/Search'
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import Home from './pages/Home'
 import Register from './pages/Register'
