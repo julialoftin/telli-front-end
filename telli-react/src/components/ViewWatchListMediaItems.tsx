@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { WatchList } from "./ViewWatchLists";
+import DeleteMediaItemFromWatchListButton from "./DeleteMediaItemFromWatchListButton";
 
 interface MediaItem {
   tmdbId: number;
@@ -13,7 +14,30 @@ interface MediaItemDetails {
   overview: string;
   poster_path: string;
   tagline: string;
+  mediaType: string;
   // Add other properties as needed
+}
+
+async function fetchMediaItemsById(id: (string | undefined)) {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/media-item/get-items-in-watchlist/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      }
+    );
+    const result = await response.json();
+    if (result.length === 0) {
+      return []
+    }
+    return result;
+  } catch (error) {
+    console.error("Error retrieving Media Items: ", error);
+  }
 }
 
 export default function ViewWatchListMediaItemsComponent() {
@@ -42,27 +66,13 @@ export default function ViewWatchListMediaItemsComponent() {
       }
     }
 
-    async function fetchMediaItemsById() {
-      try {
-        const response = await fetch(
-          `http://localhost:8080/api/media-item/get-items-in-watchlist/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          }
-        );
-        const result = await response.json();
-        setMediaItems(result);
-      } catch (error) {
-        console.error("Error retrieving Media Items: ", error);
-      }
+    const fetchAllMediaItems = async () => {
+      const results = await fetchMediaItemsById(id);
+      setMediaItems(results);
     }
 
     fetchWatchListById();
-    fetchMediaItemsById();
+    fetchAllMediaItems();
   }, [id]);
 
   useEffect(() => {
@@ -93,8 +103,9 @@ export default function ViewWatchListMediaItemsComponent() {
               tmdbId: mediaItem.tmdbId,
               title: movieData.title,
               overview: movieData.overview,
-            //   mediaType: "movie",
+              mediaType: "movie",
               poster_path: movieData.poster_path,
+              tagline: movieData.tagline,
               // Add other properties as needed
             };
           } else if (tvData.name) {
@@ -103,6 +114,8 @@ export default function ViewWatchListMediaItemsComponent() {
               title: tvData.name,
               overview: tvData.overview,
               mediaType: "tv",
+              poster_path: tvData.poster_path,
+              tagline: tvData.tagline,
               // Add other properties as needed
             };
           } else {
@@ -140,22 +153,28 @@ export default function ViewWatchListMediaItemsComponent() {
         )}
       </div>
       <div>
-        {mediaDetails && (
+        {mediaDetails && watchList !== undefined && (
           <>
-          <div className="movie-list">
-            {mediaDetails.map((mediaDetail) => (
-              <div className="movie-item" key={mediaDetail.tmdbId}>
-                <a href={`/movie/${mediaDetail.tmdbId}`}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${mediaDetail.poster_path}`}
-                  alt={mediaDetail.title}
-                />
-                <p>{mediaDetail.title}</p>
-                </a>
-                <p>{mediaDetail.tagline}</p>
-                <p>{mediaDetail.overview}</p>
-              </div>
-            ))}
+            <div className="movie-list">
+              {mediaDetails.map((mediaDetail) => (
+                <div className="movie-item" key={mediaDetail.tmdbId}>
+                  <a href={`/movie/${mediaDetail.tmdbId}`}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${mediaDetail.poster_path}`}
+                      alt={mediaDetail.title}
+                    />
+                    <p>{mediaDetail.title}</p>
+                  </a>
+                  <p>{mediaDetail.tagline}</p>
+                  <p>{mediaDetail.overview}</p>
+                  <DeleteMediaItemFromWatchListButton
+                    tmdbId={mediaDetail.tmdbId}
+                    watchListId={watchList.id}
+                    mediaType={mediaDetail.mediaType}
+                    onDelete={() => fetchMediaItemsById(String(watchList.id)).then((updatedMediaItems) => setMediaItems(updatedMediaItems))}
+                  />
+                </div>
+              ))}
             </div>
           </>
         )}
