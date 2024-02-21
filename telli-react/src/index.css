@@ -73,6 +73,8 @@ button:focus-visible {
 .movie-list {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2vw;
 }
 
 .review-by-user {

@@ -40,7 +40,7 @@ interface NavBarProps {
             <>
               <li>
                 <Link to="/">
-                  <button>Home</button>
+                  <button>Telli</button>
                 </Link>
               </li>
               <li>

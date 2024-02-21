@@ -18,7 +18,7 @@ interface MediaItemDetails {
   // Add other properties as needed
 }
 
-async function fetchMediaItemsById(id: (string | undefined)) {
+async function fetchMediaItemsById(id: string | undefined) {
   try {
     const response = await fetch(
       `http://localhost:8080/api/media-item/get-items-in-watchlist/${id}`,
@@ -30,9 +30,12 @@ async function fetchMediaItemsById(id: (string | undefined)) {
         credentials: "include",
       }
     );
+    if (response.status === 404) {
+      return [];
+    }
     const result = await response.json();
     if (result.length === 0) {
-      return []
+      return [];
     }
     return result;
   } catch (error) {
@@ -67,9 +70,9 @@ export default function ViewWatchListMediaItemsComponent() {
     }
 
     const fetchAllMediaItems = async () => {
-      const results = await fetchMediaItemsById(id);
-      setMediaItems(results);
-    }
+        const results = await fetchMediaItemsById(id);
+        setMediaItems(results);
+    };
 
     fetchWatchListById();
     fetchAllMediaItems();
@@ -137,7 +140,7 @@ export default function ViewWatchListMediaItemsComponent() {
       setMediaDetails(details.filter(Boolean) as MediaItemDetails[]);
     }
 
-    if (mediaItems.length > 0) {
+    if (mediaItems.length > 0 ) {
       fetchMediaDetails();
     }
   }, [id, mediaItems]);
@@ -153,7 +156,8 @@ export default function ViewWatchListMediaItemsComponent() {
         )}
       </div>
       <div>
-        {mediaDetails && watchList !== undefined && (
+      {mediaItems.length === 0 && ( <p>No media on this watchlist yet!</p>)}
+        {watchList && mediaDetails !== undefined && (
           <>
             <div className="movie-list">
               {mediaDetails.map((mediaDetail) => (
@@ -171,7 +175,11 @@ export default function ViewWatchListMediaItemsComponent() {
                     tmdbId={mediaDetail.tmdbId}
                     watchListId={watchList.id}
                     mediaType={mediaDetail.mediaType}
-                    onDelete={() => fetchMediaItemsById(String(watchList.id)).then((updatedMediaItems) => setMediaItems(updatedMediaItems))}
+                    onDelete={() =>
+                      fetchMediaItemsById(String(watchList.id)).then(
+                        (updatedMediaItems) => setMediaItems(updatedMediaItems)
+                      )
+                    }
                   />
                 </div>
               ))}
