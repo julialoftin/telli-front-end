@@ -80,6 +80,7 @@ export default function TagSelect({ mediaItemDTO }: AddTagToMediaItemProps) {
           <select
             onChange={(event) => setSelectedTag(String(event.target.value))}
             value={selectedTag || ""}
+            className="tag-select"
           >
             <option value="" disabled>
               Select a Tag

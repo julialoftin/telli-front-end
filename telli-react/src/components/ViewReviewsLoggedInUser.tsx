@@ -115,7 +115,7 @@ export default function ViewReviewsLoggedInUser() {
       }
     }
     if (reviews === undefined) {
-        return setReviews([]);
+      return setReviews([]);
     }
     if (reviews.length > 0 && mediaDetails === undefined) {
       fetchMediaDetails();
@@ -135,28 +135,40 @@ export default function ViewReviewsLoggedInUser() {
                 );
 
                 return (
-                  <div className="movie-list" key={review.id}>
-                    <div className="movie-item">
-                      <div>
-                        {eachMediaDetail && (
-                          <>
-                            <img
-                              src={`https://image.tmdb.org/t/p/w500/${eachMediaDetail?.poster_path}`}
-                              alt={eachMediaDetail?.title}
-                            />
-                            <h2>{eachMediaDetail?.title}</h2>
-                            <h4>{eachMediaDetail?.tagline}</h4>
-                          </>
-                        )}
+                  <div key={review.id}>
+                    <div className="movie-list">
+                      <div className="movie-item">
+                        <div>
+                          {eachMediaDetail && (
+                            <>
+                              <a href={`/movie/${eachMediaDetail.tmdbId}`}>
+                                <img
+                                  src={`https://image.tmdb.org/t/p/w500/${eachMediaDetail.poster_path}`}
+                                  alt={eachMediaDetail.title}
+                                />
+                                <h2>{eachMediaDetail.title}</h2>
+                              </a>
+                              <h4>{eachMediaDetail.tagline}</h4>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                      <div className="review-by-user">
+                        <p className="review-user-username">
+                          {review.user.username}
+                        </p>
+                        <h4>{review.title}</h4>
+                        <p>{review.reviewBody}</p>
+                        <DeleteReviewButton
+                          reviewId={review.id}
+                          onDelete={() => {
+                            fetchReviewsByUser().then((updatedReviews) =>
+                              setReviews(updatedReviews)
+                            );
+                          }}
+                        />
                       </div>
                     </div>
-                    <div>
-                      <p>{review.user.username}</p>
-                      <h4>{review.title}</h4>
-                      <p>{review.reviewBody}</p>
-                    </div>
-                    <DeleteReviewButton reviewId={review.id}
-                        onDelete={() => {fetchReviewsByUser().then((updatedReviews) => setReviews(updatedReviews))}} />
                   </div>
                 );
               })}

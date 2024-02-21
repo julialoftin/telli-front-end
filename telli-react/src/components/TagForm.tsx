@@ -58,7 +58,7 @@ export default function TagForm() {
       {isSubmissionSuccessful ? (
         <p>Tag created successfully!</p>
       ) : (
-        <form onSubmit={handleNewTagFormSubmission}>
+        <form onSubmit={handleNewTagFormSubmission} >
           <label htmlFor="name">
             Name of Tag:
             <input
@@ -69,7 +69,7 @@ export default function TagForm() {
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-          <input type="submit" value="Create"></input>
+          <button type="submit">Create</button>
         </form>
       )}
     </>

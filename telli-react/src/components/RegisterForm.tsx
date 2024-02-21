@@ -104,7 +104,7 @@ export default function RegisterForm({
                 />
               </label>
 
-              <input type="submit" value="Register" />
+              <input type="submit" value="Regsiter"></input>
             </form>
             <p className="error">{registrationMessage}</p>
           </div>

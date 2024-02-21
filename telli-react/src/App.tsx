@@ -9,6 +9,7 @@ import Profile from './pages/Profile'
 import MovieDetails from './pages/MovieDetails'
 import ViewWatchListMediaItemsComponent from './components/ViewWatchListMediaItems'
 import ViewAllMediaItemsWithTagLinkComponent from './components/ViewAllMediaItemsWithTagLinkComponent'
+import WriteAReview from './pages/WriteAReview'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,7 +26,7 @@ function App() {
           <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="/watchlist/:id" element={<ViewWatchListMediaItemsComponent />} />
           <Route path="/media-item/:id" element={<ViewAllMediaItemsWithTagLinkComponent />} />
-          
+          <Route path="/write-review" element={<WriteAReview />} />
         </Routes>
       </BrowserRouter>
     </>
