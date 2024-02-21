@@ -75,8 +75,9 @@ export default function MovieDetails() {
           mediaItemDTO={mediaItemDTO}
           mediaTitle={mediaTitle}
         />
-        <TagForm />
-        <TagSelect mediaItemDTO={mediaItemDTO} />
+        {/* <TagForm />
+        <TagSelect mediaItemDTO={mediaItemDTO} /> */}
+        <h2>Tags</h2>
         <ViewTagByMediaItem mediaItemDTO={mediaItemDTO} />
         <ViewReviewsByMediaItem mediaItemDTO={mediaItemDTO} />
         <PostAReviewButton mediaItemDTO={mediaItemDTO} movieDetails={movieDetails} />
