@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { ChangeEvent } from 'react';
 
 interface MovieGenre {
-    title: string
-    genre: string
+    id: number,
+    name: string
 }
-export const Filter = () => {
-    //create a function to filter the search results from searchbar by genre with select buttons.
-    const [filter, setFilter] = useState("")
-    const [movieGenre, setMovieGenre] = useState<MovieGenre[]>([])
-    const handleInputChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        setFilter(event.target.value as string);
-    };
+
+interface FilterProps {
+    setSelectedGenreId: (genreId: number | string) => void; // Accepts either number or string
+}
+
+export const Filter: React.FC<FilterProps> = ({ setSelectedGenreId }) => {
+    const [movieGenre, setMovieGenre] = useState<MovieGenre[]>([]);
 
     useEffect(() => {
         async function getMovieGenre() {
@@ -29,31 +29,29 @@ export const Filter = () => {
             try {
                 const response = await fetch(url, options);
                 const json = await response.json();
-                const dataResponse = json.results;
+                const dataResponse = json.genres;
                 setMovieGenre(dataResponse);
             } catch (error) {
-                console.error("Error fetching movie details:", error);
+                console.error("Error fetching movie genres:", error);
             }
         };
         getMovieGenre();
-    }, [filter])
+    }, []);
+
+    const handleInputChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        const selectedGenreId = event.target.value;
+        setSelectedGenreId(selectedGenreId); // Call setSelectedGenreId with selected genre ID
+    };
 
     return (
-        <div className="filter-wrapper">Filter by Genre
-
-            {
-                movieGenre.map((result) => (
-                    <select name="genre"
-                        onSelect={handleInputChange}
-                    >  
-                        <option key={result.genre[0]} value={result.genre[1]}>Action</option>
-                    </select>
-
-                ))
-
-            }
+        <div className="filter-wrapper">
+            Filter by Genre
+            <select name="genre" onChange={handleInputChange}>
+                <option value="">All Genres</option>
+                {movieGenre.map((genres) => (
+                    <option key={genres.id} value={genres.id}>{genres.name}</option>
+                ))}
+            </select>
         </div>
-
-    )
-
-}
+    );
+};
