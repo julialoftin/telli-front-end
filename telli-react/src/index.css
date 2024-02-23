@@ -104,42 +104,43 @@ button:focus-visible {
   max-width: 20vw;
 }
 
-h1.movie-feed-title {
+/* Styling for home page media feed */
+h1.movie-list-media-feed {
   display: flex;
-  flex-wrap: wrap;
   place-content: center;
 }
-
-.movie-list-media-feed {
+/* Styling for home page media feed */
+div.movie-list-media-feed {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  /* place-content: center; */
   justify-content: space-evenly;
-  gap: 2vw;
+  gap: 1vw;
 }
-
-.movie-item-media-feed {
+/* Styling for home page media feed */
+div.movie-item-media-feed {
   width: 200px;
-  border-radius: 8px;
 }
-
-.movie-item-media-feed img {
+/* Styling for home page media feed */
+img.movie-item-media-feed {
   max-width: 100%;
   height: auto;
-  
+  border-radius: 6px;
 }
-
+/* Styling for home page media feed */
+h2.movie-item-media-feed {
+  margin: auto;
+}
+/* Styling for tag form input */
 label.review-label {
   display: flex;
   flex-direction: row;
 }
-
+/* Styling for tag form input */
 #title, #reviewBody {
   margin-bottom: 0.5em;
 }
-
-/* Tag form name input */
+/* Styling for tag form input */
 #name {
   margin-right: 0.5em;
 }
