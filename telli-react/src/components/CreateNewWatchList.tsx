@@ -1,11 +1,18 @@
 import React, { useState } from "react";
+import { fetchGetWatchLists } from "./ViewWatchLists";
 
 interface WatchListFormInfo {
-  name: string,
-  description: string,
+  name: string;
+  description: string;
 }
 
-async function fetchProcessCreateWatchListForm(watchListFormInfo: WatchListFormInfo) {
+interface CreateNewWatchListProps {
+  onUpdate: () => void;
+}
+
+async function fetchProcessCreateWatchListForm(
+  watchListFormInfo: WatchListFormInfo
+) {
   try {
     const response = await fetch("http://localhost:8080/api/watchlist/create", {
       method: "POST",
@@ -13,7 +20,7 @@ async function fetchProcessCreateWatchListForm(watchListFormInfo: WatchListFormI
         "Content-Type": "application/json",
       },
       body: JSON.stringify(watchListFormInfo),
-      credentials: 'include'
+      credentials: "include",
     });
     return response;
   } catch (error) {
@@ -21,14 +28,19 @@ async function fetchProcessCreateWatchListForm(watchListFormInfo: WatchListFormI
   }
 }
 
-export default function CreateNewWatchListForm() {
+export default function CreateNewWatchListForm({onUpdate}: CreateNewWatchListProps) {
   const [isSubmissionSuccessful, setIsSubmissionSuccessful] = useState(false);
 
-  async function handleNewWatchListFormSubmission(event: React.FormEvent<HTMLFormElement>) {
+  async function handleNewWatchListFormSubmission(
+    event: React.FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
 
-    const name: string = (document.getElementById("name") as HTMLInputElement).value;
-    const description: string = (document.getElementById("description") as HTMLInputElement).value;
+    const name: string = (document.getElementById("name") as HTMLInputElement)
+      .value;
+    const description: string = (
+      document.getElementById("description") as HTMLInputElement
+    ).value;
 
     const watchListFormInfo = {
       name: name,
@@ -39,12 +51,16 @@ export default function CreateNewWatchListForm() {
       const response = await fetchProcessCreateWatchListForm(watchListFormInfo);
       if (response) {
         if (response.ok) {
+          onUpdate();
           setIsSubmissionSuccessful(true);
         } else {
-          console.error("Error: Form submission failed. Status code: ", response.status);
+          console.error(
+            "Error: Form submission failed. Status code: ",
+            response.status
+          );
         }
       } else {
-        console.error("Error: Form submission failed. No response received.")
+        console.error("Error: Form submission failed. No response received.");
       }
     } catch (error) {
       console.error(error);
@@ -66,7 +82,7 @@ export default function CreateNewWatchListForm() {
             Description:
             <input type="text" id="description" name="description"></input>
           </label>
-          <input type="submit" value="Create"></input>
+          <button type="submit" onClick={onUpdate}>Create</button>
         </form>
       )}
     </>
