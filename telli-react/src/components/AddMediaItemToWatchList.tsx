@@ -25,6 +25,7 @@ export default function AddMediaToWatchListSelect({
   const [selectedWatchList, setSelectedWatchList] = useState<number | null>(
     null
   );
+  const [isSubmissionSuccessful, setIsSubmissionSuccessful] = useState(false);
 
   useEffect(() => {
     async function fetchWatchLists() {
@@ -79,7 +80,7 @@ export default function AddMediaToWatchListSelect({
       }
     }
 
-try {
+    try {
       const response = await fetch(
         `http://localhost:8080/api/media-item/add-to-watchlist/${Number(
           selectedWatchList
@@ -94,6 +95,7 @@ try {
         }
       );
       const result = await response.json();
+        setIsSubmissionSuccessful(true);
       return result;
     } catch (error) {
       console.error("Error adding media item to watchlist: ", error);
@@ -102,6 +104,11 @@ try {
 
   return (
     <>
+    {isSubmissionSuccessful ? (
+      <div>
+        <p>Added to watch list!</p>
+      </div>
+    ) : (
       <div>
         <form>
           <select
@@ -110,7 +117,7 @@ try {
             }
             value={selectedWatchList || ""}
           >
-            <option value="" disabled >
+            <option value="" disabled>
               Select a Watch List
             </option>
             {watchLists.map((watchList) => (
@@ -125,6 +132,7 @@ try {
           </button>
         </form>
       </div>
+      )}
     </>
   );
 }
