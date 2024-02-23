@@ -30,7 +30,6 @@ export default function Profile() {
             Hide your Watch Lists
           </button>
           <DisplayAllWatchLists />
-          <CreateNewWatchListForm />
         </div>
       ) : (
         <>

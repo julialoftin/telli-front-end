@@ -3,6 +3,7 @@ import EditWatchListForm from "./EditWatchListForm";
 import DeleteWatchListButton from "./DeleteWatchListButton";
 import EditWatchListButton from "./EditWatchListButton";
 import { Link } from "react-router-dom"
+import CreateNewWatchListForm from "./CreateNewWatchList";
 
 export interface WatchList {
   id: number;
@@ -62,6 +63,11 @@ export default function DisplayAllWatchLists() {
     setEditingWatchList(null);
   }
 
+  const handleWatchListChange = async () => {
+    const data = await fetchGetWatchLists();
+    setWatchLists(data);
+  }
+
   return (
     <>
       <div>
@@ -80,12 +86,13 @@ export default function DisplayAllWatchLists() {
                   <Link to={`/watchlist/${watchList.id}`}>{watchList.name}</Link>
                   <p>{watchList.description}</p>
                   <EditWatchListButton onClick={() => handleEditClick(watchList)} />
-                  <DeleteWatchListButton onDelete={fetchGetWatchLists} watchListId={watchList.id} />
+                  <DeleteWatchListButton onDelete={() => handleWatchListChange()} watchListId={watchList.id} />
                 </>
               )}
             </li>
           ))}
         </ul>
+        <CreateNewWatchListForm onUpdate={() => handleWatchListChange()} />
       </div>
     </>
   );

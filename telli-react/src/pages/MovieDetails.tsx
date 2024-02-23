@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AddMediaToWatchListSelect from "../components/AddMediaItemToWatchList";
-import TagForm from "../components/TagForm";
-import TagSelect from "../components/TagSelect";
 import ViewTagByMediaItem from "../components/ViewTagByMediaItem";
 import ViewReviewsByMediaItem from "../components/ViewReviewsByMediaItem";
 import PostAReviewButton from "../components/PostAReviewButton";
