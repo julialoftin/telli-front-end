@@ -13,6 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
   margin-left: 5vw;
   margin-right: 5vw;
+  
 }
 
 a {
@@ -29,6 +30,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  max-width: 1440px;
 }
 
 button {
@@ -104,42 +106,39 @@ button:focus-visible {
   max-width: 20vw;
 }
 
-h1.movie-feed-title {
+/* Styling for home page media feed */
+h1.movie-list-media-feed {
   display: flex;
-  flex-wrap: wrap;
   place-content: center;
 }
-
-.movie-list-media-feed {
+div.movie-list-media-feed {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  /* place-content: center; */
   justify-content: space-evenly;
-  gap: 2vw;
+  gap: 1vw;
 }
-
-.movie-item-media-feed {
+div.movie-item-media-feed {
   width: 200px;
-  border-radius: 8px;
 }
-
-.movie-item-media-feed img {
+img.movie-item-media-feed {
   max-width: 100%;
   height: auto;
-  
+  border-radius: 6px;
+}
+h2.movie-item-media-feed {
+  margin: auto;
 }
 
+
+/* Styling for tag form input */
 label.review-label {
   display: flex;
   flex-direction: row;
 }
-
 #title, #reviewBody {
   margin-bottom: 0.5em;
 }
-
-/* Tag form name input */
 #name {
   margin-right: 0.5em;
 }
@@ -152,15 +151,33 @@ label.review-label {
   margin-right: 0.5em;
 }
 
-.movieDetails {
+/* Movie Details page */
+div.movieDetails {
+  display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
+  max-width: 35vw;
+  flex-basis: 100%;
+  flex: 1;
 }
-
-.tagline {
+div.movieDetails img {
+  max-width: 20vw;
+  border-radius: 8px;
+}
+p.tagline {
   font-size: 1.2em;
 }
-
-.movieDetails img {
-  border-radius: 15px;
-  max-height: 60vh;
+div.movieDetailsPage {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 2vw;
 }
+div.movieDetailsRightColumn {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+

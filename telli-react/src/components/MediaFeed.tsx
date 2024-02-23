@@ -51,16 +51,16 @@ export default function MediaFeed() {
   
   return (
     <>
-      <h1 className="movie-feed-title">Popular Movies</h1>
+      <h1 className="movie-list-media-feed">Popular Movies</h1>
       <div className="movie-list-media-feed">
         {popularMovies.map((movie) => (
           <div key={movie.id} className="movie-item-media-feed">
             <a href={`/movie/${movie.id}`}>
-              <img className="media-feed"
+              <img className="movie-item-media-feed"
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
               />
-              <h2>{movie.title}</h2>
+              <h2 className="movie-item-media-feed">{movie.title}</h2>
             </a>
           </div>
         ))}
