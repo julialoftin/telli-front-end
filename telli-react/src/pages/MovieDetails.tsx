@@ -58,30 +58,34 @@ export default function MovieDetails() {
   const mediaTitle = movieDetails.title;
 
   return (
-    <>
-      <div className="movieDetails">
-        <div key={movieDetails.id}>
-          <h1 className="title">{movieDetails.title}</h1>
-          <img
-            src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
-            alt={movieDetails.title}
-          />
+    <div className="movieDetailsPage">
+      <div>
+        <div key={movieDetails.id} className="movieDetails">
+          <div>
+            <h1>{movieDetails.title}</h1>
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+              alt={movieDetails.title}
+            />
+          </div>
           <p className="tagline">{movieDetails.tagline}</p>
           <p className="overview">{movieDetails.overview}</p>
+          <ViewTagByMediaItem mediaItemDTO={mediaItemDTO} />
+          <AddMediaToWatchListSelect
+            mediaItemDTO={mediaItemDTO}
+            mediaTitle={mediaTitle}
+          />
         </div>
       </div>
-      <div>
-        <AddMediaToWatchListSelect
-          mediaItemDTO={mediaItemDTO}
-          mediaTitle={mediaTitle}
-        />
-        {/* <TagForm />
-        <TagSelect mediaItemDTO={mediaItemDTO} /> */}
-        <h2>Tags</h2>
-        <ViewTagByMediaItem mediaItemDTO={mediaItemDTO} />
-        <ViewReviewsByMediaItem mediaItemDTO={mediaItemDTO} />
-        <PostAReviewButton mediaItemDTO={mediaItemDTO} movieDetails={movieDetails} />
+      <div className="movieDetailsRightColumn">
+        <div>
+          <ViewReviewsByMediaItem mediaItemDTO={mediaItemDTO} />
+          <PostAReviewButton
+            mediaItemDTO={mediaItemDTO}
+            movieDetails={movieDetails}
+          />
+        </div>
       </div>
-    </>
+    </div>
   );
 }
