@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ChangeEvent } from 'react';
 import { Filter } from "./Filter";
 
 interface MovieData {
   title: string,
+  id: string,
+  release_date: string,
   genre_ids: number[]
 }
 
@@ -61,7 +63,9 @@ export const SearchBar = () => {
           <Filter setSelectedGenreId={handleGenreChange} /> {/* Pass setSelectedGenreId as a prop */}
           {filteredMovieData.map((result, index) => (
               <div key={index}>
-                  <p>Movie Title: {result.title}</p>
+                    <a href={`/movie/${result.id}`}>
+                  <p>{result.title}, {result.release_date}</p>
+                  </a>
               </div>
           ))}
       </div>
