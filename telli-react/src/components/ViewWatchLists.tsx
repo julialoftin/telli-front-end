@@ -63,7 +63,7 @@ export default function DisplayAllWatchLists() {
     setEditingWatchList(null);
   }
 
-  const handleNewWatchList = async () => {
+  const handleWatchListChange = async () => {
     const data = await fetchGetWatchLists();
     setWatchLists(data);
   }
@@ -86,13 +86,13 @@ export default function DisplayAllWatchLists() {
                   <Link to={`/watchlist/${watchList.id}`}>{watchList.name}</Link>
                   <p>{watchList.description}</p>
                   <EditWatchListButton onClick={() => handleEditClick(watchList)} />
-                  <DeleteWatchListButton onDelete={fetchGetWatchLists} watchListId={watchList.id} />
+                  <DeleteWatchListButton onDelete={() => handleWatchListChange()} watchListId={watchList.id} />
                 </>
               )}
             </li>
           ))}
         </ul>
-        <CreateNewWatchListForm onUpdate={() => handleNewWatchList()} />
+        <CreateNewWatchListForm onUpdate={() => handleWatchListChange()} />
       </div>
     </>
   );
