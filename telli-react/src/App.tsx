@@ -13,6 +13,7 @@ import MovieDetails from './pages/MovieDetails'
 import ViewWatchListMediaItemsComponent from './components/ViewWatchListMediaItems'
 import ViewAllMediaItemsWithTagLinkComponent from './components/ViewAllMediaItemsWithTagLinkComponent'
 import WriteAReview from './pages/WriteAReview'
+import TVSeriesDetailsPage from './pages/TVSeriesDetails'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,6 +28,7 @@ function App() {
           <Route path="/register" element={<Register setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/tv/:id" element={<TVSeriesDetailsPage />} />
           <Route path="/watchlist/:id" element={<ViewWatchListMediaItemsComponent />} />
           <Route path="/media-item/:id" element={<ViewAllMediaItemsWithTagLinkComponent />} />
           <Route path="/write-review" element={<WriteAReview />} />
