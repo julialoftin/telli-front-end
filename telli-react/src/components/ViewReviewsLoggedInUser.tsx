@@ -21,6 +21,7 @@ interface MediaItemDetails {
   overview: string;
   poster_path: string;
   tagline: string;
+  mediaType: string;
 }
 
 export async function fetchReviewsByUser() {
@@ -87,20 +88,23 @@ export default function ViewReviewsLoggedInUser() {
             tvResult.json(),
           ]);
 
-          if (movieData.title) {
+          if (mediaItem.mediaType === "movie") {
             return {
               tmdbId: mediaItem.tmdbId,
               title: movieData.title,
               overview: movieData.overview,
               poster_path: movieData.poster_path,
+              mediaType: "movie",
               tagline: movieData.tagline,
             };
-          } else if (tvData.name) {
+          } else if (mediaItem.mediaType === "tv") {
             return {
               tmdbId: mediaItem.tmdbId,
               title: tvData.name,
               overview: tvData.overview,
+              poster_path: tvData.poster_path,
               mediaType: "tv",
+              tagline: tvData.tagline,
             };
           } else {
             console.error(
@@ -145,6 +149,8 @@ export default function ViewReviewsLoggedInUser() {
                         <div>
                           {eachMediaDetail && (
                             <>
+                            {/* if eachMediaDetail.mediaType === tv, call tv img endpoint, else call movie img endpoint */}
+                            {eachMediaDetail.mediaType === "movie" ? (
                               <a href={`/movie/${eachMediaDetail.tmdbId}`}>
                                 <img
                                   src={`https://image.tmdb.org/t/p/w500/${eachMediaDetail.poster_path}`}
@@ -152,6 +158,15 @@ export default function ViewReviewsLoggedInUser() {
                                 />
                                 <h2>{eachMediaDetail.title}</h2>
                               </a>
+                            ) : (
+                              <a href={`/tv/${eachMediaDetail.tmdbId}`}>
+                                <img
+                                  src={`https://image.tmdb.org/t/p/w500/${eachMediaDetail.poster_path}`}
+                                  alt={eachMediaDetail.title}
+                                />
+                                <h2>{eachMediaDetail.title}</h2>
+                              </a>
+                             )}
                               <h4>{eachMediaDetail.tagline}</h4>
                             </>
                           )}
