@@ -26,6 +26,7 @@ export default function AddMediaToWatchListSelect({
     null
   );
   const [isSubmissionSuccessful, setIsSubmissionSuccessful] = useState(false);
+  const [responseMessage, setResponseMessage] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchWatchLists() {
@@ -72,6 +73,7 @@ export default function AddMediaToWatchListSelect({
           mediaItemDTO.mediaType = "tv";
         } else {
           console.error("Media type could not be determined");
+          setResponseMessage("Media type could not be determined. Item not added to watch list.");
           return;
         }
       } catch (error) {
@@ -94,11 +96,18 @@ export default function AddMediaToWatchListSelect({
           credentials: "include",
         }
       );
+      if (response.status === 409) {
+        setIsSubmissionSuccessful(false);
+        setResponseMessage("Item already exists on chosen watch list. Item not duplicated.")
+      }
       const result = await response.json();
         setIsSubmissionSuccessful(true);
+        setResponseMessage("Added to watch list!")
       return result;
     } catch (error) {
       console.error("Error adding media item to watchlist: ", error);
+      setIsSubmissionSuccessful(false);
+      setResponseMessage("An error occured adding item to watch list. Item not added.");
     }
   };
 
@@ -106,7 +115,7 @@ export default function AddMediaToWatchListSelect({
     <>
     {isSubmissionSuccessful ? (
       <div>
-        <p>Added to watch list!</p>
+        <p className="message">{responseMessage}</p>
       </div>
     ) : (
       <div>
@@ -131,6 +140,7 @@ export default function AddMediaToWatchListSelect({
             Add
           </button>
         </form>
+        <p className="error">{responseMessage}</p>
       </div>
       )}
     </>
