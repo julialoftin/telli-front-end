@@ -31,8 +31,12 @@ export default function ViewReviewsByMediaItem({
   useEffect(() => {
     const fetchReviewsByMediaItem = async () => {
       try {
+        const queryParams = new URLSearchParams({
+          tmdbId: mediaItemDTO.tmdbId.toString(),
+          mediaType: mediaItemDTO.mediaType,
+        });
         const response = await fetch(
-          `http://localhost:8080/api/review/get-reviews-by-media-item/${mediaItemDTO.tmdbId}`,
+          `http://localhost:8080/api/review/get-reviews-by-media-item?${queryParams}`,
           {
             method: "GET",
             headers: {

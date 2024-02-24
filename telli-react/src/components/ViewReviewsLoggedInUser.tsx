@@ -54,6 +54,9 @@ export default function ViewReviewsLoggedInUser() {
   useEffect(() => {
     const fetchAllReviewsByUser = async () => {
       const results = await fetchReviewsByUser();
+      if (results.length === 0) {
+        setReviews([]);
+      }
       setReviews(results);
     };
 
@@ -129,7 +132,8 @@ export default function ViewReviewsLoggedInUser() {
           {reviews && mediaDetails !== undefined && (
             <div>
               <h2>Your Reviews</h2>
-              {reviews.map((review) => {
+              {reviews.length > 0 ? (
+              reviews.map((review) => {
                 const eachMediaDetail = mediaDetails.find(
                   (detail) => detail.tmdbId === review.mediaItem.tmdbId
                 );
@@ -171,7 +175,10 @@ export default function ViewReviewsLoggedInUser() {
                     </div>
                   </div>
                 );
-              })}
+              })
+            ) : (
+              <p>You haven't posted a review yet!</p>
+            )}
             </div>
           )}
         </>
