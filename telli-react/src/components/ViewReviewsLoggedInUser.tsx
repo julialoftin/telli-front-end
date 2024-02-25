@@ -149,7 +149,6 @@ export default function ViewReviewsLoggedInUser() {
                         <div>
                           {eachMediaDetail && (
                             <>
-                            {/* if eachMediaDetail.mediaType === tv, call tv img endpoint, else call movie img endpoint */}
                             {eachMediaDetail.mediaType === "movie" ? (
                               <a href={`/movie/${eachMediaDetail.tmdbId}`}>
                                 <img
