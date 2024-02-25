@@ -65,21 +65,21 @@ export default function ViewAllMediaItemsWithTagLinkComponent() {
             tvResult.json(),
           ]);
 
-          if (movieData.title) {
+          if (mediaItem.mediaType === "movie") {
             return {
               tmdbId: mediaItem.tmdbId,
               title: movieData.title,
               overview: movieData.overview,
-              //   mediaType: "movie",
               poster_path: movieData.poster_path,
               // Add other properties as needed
             };
-          } else if (tvData.name) {
+          } else if (mediaItem.mediaType === "tv") {
             return {
               tmdbId: mediaItem.tmdbId,
               title: tvData.name,
               overview: tvData.overview,
               mediaType: "tv",
+              poster_path: tvData.poster_path,
               // Add other properties as needed
             };
           } else {
